@@ -6,8 +6,8 @@ This repo contains two simple files that executes many forms of NLTK's text clea
 
 The files consist of:
 
-1. [text_cleaning_pipeline.py](/scripts/tfidf/text_cleaning_pipeline.py): Runs tfidf on a corpus, exporting a .csv organized by input files.
-2. [text_cleaning.sbatch](/scripts/tfidf/text_cleaning.sbatch): Creates a batch job for text_cleaning_pipeline.py.
+1. [text_cleaning_pipeline.py](text_cleaning_pipeline.py): Runs tfidf on a corpus, exporting a .csv organized by input files.
+2. [text_cleaning.sbatch](text_cleaning.sbatch): Creates a batch job for text_cleaning_pipeline.py.
 
 ## Usage instructions
 
@@ -15,21 +15,13 @@ The files consist of:
 ```
 ssh yourSUNetID@sherlock.stanford.edu
 ```
+2. Once you get on Sherlock, you'll want to have access to these files:
+```bash
+git clone https://github.com/bcritt1/text_cleaning.git
+```
 
-2. Once you are logged in, you'll want to have access to these files, which you can get with a couple simple commands. First, we need to install a program called subversion:
-```
-ml system subversion
-```
-and use that program to download the files:
-```
-svn export https://github.com/bcritt1/H-S-Documentation/trunk/scripts/text_cleaning/ text_cleaning
-```
 This will create a directory in your home space on Sherlock called "text_cleaning" with all the files in this 
-repository. You'll want to
-```
-ml purge
-```
-after this as subversion tends to interfere with python dependencies.
+repository.
 
 3. Once you have the files, you'll use packages.sh to set up your environment. First, let's move into our new directory::
 ```
