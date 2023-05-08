@@ -23,19 +23,23 @@ git clone https://github.com/bcritt1/text_cleaning.git
 This will create a directory in your home space on Sherlock called "text_cleaning" with all the files in this 
 repository.
 
-3. Once you have the files, you'll use packages.sh to set up your environment. First, let's move into our new directory::
+3. Let's also make three directories for the outputs of our process:
+```
+mkdir out err /scratch/users/$USER/outputs
+```
+
+4. Once you have the files, you'll use packages.sh to set up your environment. First, let's move into our new directory::
 ```
 cd text_cleaning/
 ```
-
-4. At this point, you're basically ready to run the script.
+and submit our sbatch file to slurm, Sherlock's job scheduler:
 ```
-sbatch text_cleaning_pipeline.sbatch
+sbatch text_cleaning.sbatch
 ```
-When it finishes running, you should see your output as a .csv file in outputs/text_cleaning in scratch. This data 
-can then be 
-used as an input for some other process.
-
+You can watch your program run with
+```
+watch squeue -u $USER
+```
 ## Code Explanation
 
 ### text_cleaning_pipeline.py 
