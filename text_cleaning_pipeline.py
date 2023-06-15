@@ -9,7 +9,7 @@ import pandas as pd
 
 # Read in a directory of txt files as the corpus using the os library.
 user = os.getenv('USER')
-corpusdir = '/scratch/{}/bcritt/corpus/'.format(user)
+corpusdir = '/scratch/users/{}/corpus/'.format(user)
 corpus = []
 for infile in os.listdir(corpusdir):
     with open(corpusdir+infile, errors='ignore') as fin:
