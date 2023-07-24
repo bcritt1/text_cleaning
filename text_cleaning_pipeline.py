@@ -8,8 +8,7 @@ import string
 import pandas as pd
 
 # Read in a directory of txt files as the corpus using the os library.
-user = os.getenv('USER')
-corpusdir = '/scratch/users/{}/corpus/'.format(user)
+corpusdir = '/farmshare/learning/data/emerson/'
 corpus = []
 for infile in os.listdir(corpusdir):
     with open(corpusdir+infile, errors='ignore') as fin:
@@ -59,4 +58,5 @@ words = [wl.lemmatize(word) for word in words]
 
 # can convert pos to df and write out as csv
 df = pd.DataFrame(words)
+user = os.getenv('USER')
 df.to_csv('/scratch/users/{}/outputs/stems.csv'.format(user))
