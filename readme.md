@@ -11,28 +11,19 @@ The files consist of:
 
 ## Usage instructions
 
-1. ssh into sherlock with the syntax: 
+1. ssh into Farmshare with the syntax: 
 ```
-ssh yourSUNetID@sherlock.stanford.edu
+ssh yourSUNetID@rice.stanford.edu
 ```
-2. Once you get on Sherlock, you'll want to have access to these files:
+2. Once you get on Farmshare, you'll need to move to the learning environment for these files:
 ```bash
-git clone https://github.com/bcritt1/text_cleaning.git
+cd /farmshare/learning/scripts/scripts/text_cleaning
 ```
-
-This will create a directory in your home space on Sherlock called "text_cleaning" with all the files in this 
-repository.
-
 3. Let's also make three directories for the outputs of our process:
 ```
-mkdir out err /scratch/users/$USER/outputs
+mkdir ~/out ~/err /scratch/users/$USER/outputs
 ```
-
-4. Once you have the files, you'll use packages.sh to set up your environment. First, let's move into our new directory::
-```
-cd text_cleaning/
-```
-and submit our sbatch file to slurm, Sherlock's job scheduler:
+4. At this point we can submit our script:
 ```
 sbatch text_cleaning.sbatch
 ```
@@ -52,14 +43,13 @@ the same throughout the script, so you should be able to comment out any process
 Pretty standard sbatch file. Depending on the size of the corpus, "time" and "mem" may need to be tweaked if you are getting "wall time" or "out of memory" errors respectively.
 
 ```bash
-#!/usr/bin/bash
+#!/bin/bash
 #SBATCH --job-name=cleaning					# gives the job a descriptive name that slurm will use
-#SBATCH --output=/home/users/%u/out/cleaning.%j.out		# the filepath slurm will use for output files. I've configured this so it automatically inserts variables for your username (%u) and the job name (%j) above.
-#SBATCH --error=/home/users/%u/err/cleaning.%j.err		# the filepath slurm will use for error files. I've configured this so it automatically inserts variables for your username (%u) and the job name (%j) above.
-#SBATCH -p hns							# the partition slurm will use for the job. Here it is hns (humanities and sciences), but you can use other partions (sh_part to see which you can access)
+#SBATCH --output=/home/%u/out/cleaning.%j.out			# the filepath slurm will use for output files. I've configured this so it automatically inserts variables for your username (%u) and the job name (%j) above.
+#SBATCH --error=/home/%u/err/cleaning.%j.err			# the filepath slurm will use for error files. I've configured this so it automatically inserts variables for your username (%u) and the job name (%j) above.
+#SBATCH -p hns							# the partition slurm will use for the job. Here it is normal, but you can use other partitions (sinfo to see which you can access)
 #SBATCH -c 1							# number of cores to use. This should be 1 unless you've rewritten the code to run in parallel
 #SBATCH --mem=32GB						# memory to use. 32GB should be plenty, but if you're getting a memory error, you can increase
-module load python/3.9.0					# load the most recent version of python on Sherlock
 pip3 install nltk						# download nltk
 pip install --upgrade certifi					# allow nltk to download files
 python3 -m nltk.downloader all					# download nltk files
